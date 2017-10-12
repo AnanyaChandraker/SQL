@@ -1,0 +1,20 @@
+SELECT  
+   CONNECTIONPROPERTY('net_transport') AS net_transport,
+   CONNECTIONPROPERTY('protocol_type') AS protocol_type,
+   CONNECTIONPROPERTY('auth_scheme') AS auth_scheme,
+   CONNECTIONPROPERTY('local_net_address') AS local_net_address,
+   CONNECTIONPROPERTY('local_tcp_port') AS local_tcp_port,
+   CONNECTIONPROPERTY('client_net_address') AS client_net_address
+   
+   The code here Will give you the IP Address;
+
+This will work for a remote client request to SQL 2008 and newer.
+
+If you have Shared Memory connections allowed, then running above on the server itself will give you
+
+"Shared Memory" as the value for 'net_transport', 
+and NULL for 'local_net_address',
+and '<local machine>' will be shown in 'client_net_address'.'client_net_address' 
+it is the address of the computer that the request originated from, 
+whereas 'local_net_address' would be the SQL server (thus NULL over Shared Memory connections),
+and the address you would give to someone if they can't use the server's NetBios name or FQDN for some reason.
